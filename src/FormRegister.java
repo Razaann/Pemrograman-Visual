@@ -247,7 +247,7 @@ public class FormRegister extends javax.swing.JFrame {
         if (CheckBoxSIMC.isSelected()){
             text += "C ";
         }
-        text += "\n Agama: " + ComboBoxAgama.getSelectedItem().toString();
+        text += "\nAgama: " + ComboBoxAgama.getSelectedItem().toString();
                 
         JOptionPane.showMessageDialog(null, text);
     }//GEN-LAST:event_ButtonRegisterActionPerformed
