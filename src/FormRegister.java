@@ -47,6 +47,9 @@ public class FormRegister extends javax.swing.JFrame {
         CheckBoxSIMB = new javax.swing.JCheckBox();
         LabelAgama = new javax.swing.JLabel();
         ComboBoxAgama = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TextArea1 = new javax.swing.JTextArea();
+        LabelAlamat = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -125,6 +128,13 @@ public class FormRegister extends javax.swing.JFrame {
             }
         });
 
+        TextArea1.setColumns(20);
+        TextArea1.setLineWrap(true);
+        TextArea1.setRows(5);
+        jScrollPane1.setViewportView(TextArea1);
+
+        LabelAlamat.setText("Alamat");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -133,12 +143,6 @@ public class FormRegister extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(LabelForm)
                 .addGap(123, 123, 123))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(125, 125, 125)
-                .addComponent(ButtonRegister)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ButtonLogin)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(65, 65, 65)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,11 +160,13 @@ public class FormRegister extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(LabelConfirmPassword)
                                     .addComponent(LabelJenisKelamin)
-                                    .addComponent(LabelAgama))
+                                    .addComponent(LabelAgama)
+                                    .addComponent(LabelAlamat))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                     .addComponent(RadioButtonLaki)
-                                    .addComponent(FieldConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(FieldConfirmPassword, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(RadioButtonPerempuan)
                                     .addComponent(CheckBoxSIMA)
                                     .addComponent(CheckBoxSIMC)
@@ -170,6 +176,12 @@ public class FormRegister extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(LabelSIM)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(125, 125, 125)
+                .addComponent(ButtonRegister)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ButtonLogin)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,7 +218,11 @@ public class FormRegister extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(LabelAgama)
                     .addComponent(ComboBoxAgama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LabelAlamat))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ButtonRegister)
                     .addComponent(ButtonLogin))
@@ -248,6 +264,8 @@ public class FormRegister extends javax.swing.JFrame {
             text += "C ";
         }
         text += "\nAgama: " + ComboBoxAgama.getSelectedItem().toString();
+        
+        text += "\nAlamat: " + TextArea1.getText();
                 
         JOptionPane.showMessageDialog(null, text);
     }//GEN-LAST:event_ButtonRegisterActionPerformed
@@ -302,6 +320,7 @@ public class FormRegister extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(FormRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -322,6 +341,7 @@ public class FormRegister extends javax.swing.JFrame {
     private javax.swing.JPasswordField FieldPassword;
     private javax.swing.JTextField FieldUser;
     private javax.swing.JLabel LabelAgama;
+    private javax.swing.JLabel LabelAlamat;
     private javax.swing.JLabel LabelConfirmPassword;
     private javax.swing.JLabel LabelForm;
     private javax.swing.JLabel LabelJenisKelamin;
@@ -330,6 +350,8 @@ public class FormRegister extends javax.swing.JFrame {
     private javax.swing.JLabel LabelUser;
     private javax.swing.JRadioButton RadioButtonLaki;
     private javax.swing.JRadioButton RadioButtonPerempuan;
+    private javax.swing.JTextArea TextArea1;
     private javax.swing.ButtonGroup buttonGroupKelamin;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
