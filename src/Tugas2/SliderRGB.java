@@ -187,7 +187,7 @@ public class SliderRGB extends javax.swing.JFrame {
 
     private void SliderGStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderGStateChanged
         // TODO add your handling code here:
-        LabelRGB5.setText(Integer.toString(SliderR.getValue()));
+        LabelRGB5.setText(Integer.toString(SliderG.getValue()));
         
         int r = SliderR.getValue();
         int g = SliderG.getValue();
@@ -198,7 +198,7 @@ public class SliderRGB extends javax.swing.JFrame {
 
     private void SliderBStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderBStateChanged
         // TODO add your handling code here:
-        LabelRGB6.setText(Integer.toString(SliderR.getValue()));
+        LabelRGB6.setText(Integer.toString(SliderB.getValue()));
         
         int r = SliderR.getValue();
         int g = SliderG.getValue();
