@@ -9,6 +9,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -40,12 +41,12 @@ public class FormCitra extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        LabelThresholding = new javax.swing.JLabel();
+        LabelNormal = new javax.swing.JLabel();
+        LabelNegative = new javax.swing.JLabel();
+        LabelBlur = new javax.swing.JLabel();
+        LabelGrayscale = new javax.swing.JLabel();
+        LabelEdge = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         MenuItemOpenFile = new javax.swing.JMenuItem();
@@ -58,17 +59,17 @@ public class FormCitra extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setPreferredSize(new java.awt.Dimension(200, 200));
+        LabelThresholding.setPreferredSize(new java.awt.Dimension(200, 200));
 
-        jLabel2.setPreferredSize(new java.awt.Dimension(200, 200));
+        LabelNormal.setPreferredSize(new java.awt.Dimension(200, 200));
 
-        jLabel3.setPreferredSize(new java.awt.Dimension(200, 200));
+        LabelNegative.setPreferredSize(new java.awt.Dimension(200, 200));
 
-        jLabel4.setPreferredSize(new java.awt.Dimension(200, 200));
+        LabelBlur.setPreferredSize(new java.awt.Dimension(200, 200));
 
-        jLabel5.setPreferredSize(new java.awt.Dimension(200, 200));
+        LabelGrayscale.setPreferredSize(new java.awt.Dimension(200, 200));
 
-        jLabel6.setPreferredSize(new java.awt.Dimension(200, 200));
+        LabelEdge.setPreferredSize(new java.awt.Dimension(200, 200));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -78,17 +79,17 @@ public class FormCitra extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(LabelNormal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(8, 8, 8)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(LabelGrayscale, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(LabelThresholding, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(LabelNegative, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(LabelEdge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(8, 8, 8)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(LabelBlur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -96,14 +97,14 @@ public class FormCitra extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(LabelNormal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LabelThresholding, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LabelGrayscale, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(LabelBlur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LabelNegative, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LabelEdge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -119,7 +120,7 @@ public class FormCitra extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        jMenu2.setText("Filter");
 
         MenuItemGrayscale.setText("GrayScale");
         MenuItemGrayscale.addActionListener(new java.awt.event.ActionListener() {
@@ -209,30 +210,285 @@ public class FormCitra extends javax.swing.JFrame {
                 .getScaledInstance(
                         200, 200, Image.SCALE_DEFAULT));
             
-            jLabel1.setIcon(myImgScaled); 
+            LabelNormal.setIcon(myImgScaled); 
         } 
         
     }//GEN-LAST:event_MenuItemOpenFileActionPerformed
 
     private void MenuItemGrayscaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemGrayscaleActionPerformed
         // TODO add your handling code here:
+        JFileChooser loadFile = new JFileChooser();
+
+        loadFile.setFileFilter(
+            new FileNameExtensionFilter(
+                "Image File (*.jpg;*.png;*.bmp)", "jpg", "jpeg", "png", "bmp"));
+
+        if(loadFile.showOpenDialog(jMenu1) == JFileChooser.APPROVE_OPTION) {
+            String path = loadFile.getSelectedFile().getPath();
+            myFileOriginal = loadFile.getSelectedFile();
+
+            try {
+                // Baca gambar asli
+                BufferedImage bufferedImg = ImageIO.read(myFileOriginal);
+
+                // Ubah ke grayscale
+                for (int x = 0; x < bufferedImg.getWidth(); x++) {
+                    for (int y = 0; y < bufferedImg.getHeight(); y++) {
+                        int rgb = bufferedImg.getRGB(x, y);
+
+                        int R = (rgb >> 16) & 0xFF;
+                        int G = (rgb >> 8) & 0xFF;
+                        int B = rgb & 0xFF;
+
+                        int grayLevel = (R + G + B) / 3;
+                        int gray = (grayLevel << 16) | (grayLevel << 8) | grayLevel;
+
+                        bufferedImg.setRGB(x, y, gray);
+                    }
+                }
+
+                // Masukkan hasil grayscale ke LabelNormal
+                ImageIcon myImgScaled = new ImageIcon(
+                    bufferedImg.getScaledInstance(200, 200, Image.SCALE_DEFAULT));
+                LabelGrayscale.setIcon(myImgScaled);
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Gagal memproses gambar: " + e.getMessage());
+            }
+        }
         
     }//GEN-LAST:event_MenuItemGrayscaleActionPerformed
 
     private void MenuItemThresholdingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemThresholdingActionPerformed
         // TODO add your handling code here:
+        JFileChooser loadFile = new JFileChooser();
+
+        loadFile.setFileFilter(
+            new FileNameExtensionFilter(
+                "Image File (*.jpg;*.png;*.bmp)", "jpg", "jpeg", "png", "bmp"));
+
+        if(loadFile.showOpenDialog(jMenu1) == JFileChooser.APPROVE_OPTION) {
+            String path = loadFile.getSelectedFile().getPath();
+            myFileOriginal = loadFile.getSelectedFile();
+
+            try {
+                // Baca gambar asli
+                BufferedImage bufferedImg = ImageIO.read(myFileOriginal);
+
+                // Threshold value
+                int threshold = 128;
+
+                // Ubah ke black & white
+                for (int x = 0; x < bufferedImg.getWidth(); x++) {
+                    for (int y = 0; y < bufferedImg.getHeight(); y++) {
+                        int rgb = bufferedImg.getRGB(x, y);
+
+                        int R = (rgb >> 16) & 0xFF;
+                        int G = (rgb >> 8) & 0xFF;
+                        int B = rgb & 0xFF;
+
+                        int grayLevel = (R + G + B) / 3;
+
+                        int bw = (grayLevel >= threshold) ? 0xFFFFFF : 0x000000;
+
+                        bufferedImg.setRGB(x, y, bw);
+                    }
+                }
+
+                // Masukkan hasil threshold ke LabelNormal
+                ImageIcon myImgScaled = new ImageIcon(
+                    bufferedImg.getScaledInstance(200, 200, Image.SCALE_DEFAULT));
+                LabelThresholding.setIcon(myImgScaled);
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Gagal memproses gambar: " + e.getMessage());
+            }
+        }
     }//GEN-LAST:event_MenuItemThresholdingActionPerformed
 
     private void MenuItemNegativeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemNegativeActionPerformed
         // TODO add your handling code here:
+        JFileChooser loadFile = new JFileChooser();
+
+        loadFile.setFileFilter(
+            new FileNameExtensionFilter(
+                "Image File (*.jpg;*.png;*.bmp)", "jpg", "jpeg", "png", "bmp"));
+
+        if(loadFile.showOpenDialog(jMenu1) == JFileChooser.APPROVE_OPTION) {
+            String path = loadFile.getSelectedFile().getPath();
+            myFileOriginal = loadFile.getSelectedFile();
+
+            try {
+                // Baca gambar asli
+                BufferedImage bufferedImg = ImageIO.read(myFileOriginal);
+
+                // Proses Negative
+                for (int x = 0; x < bufferedImg.getWidth(); x++) {
+                    for (int y = 0; y < bufferedImg.getHeight(); y++) {
+                        int rgb = bufferedImg.getRGB(x, y);
+
+                        int R = (rgb >> 16) & 0xFF;
+                        int G = (rgb >> 8) & 0xFF;
+                        int B = rgb & 0xFF;
+
+                        int Rn = 255 - R;
+                        int Gn = 255 - G;
+                        int Bn = 255 - B;
+
+                        int newRGB = (Rn << 16) | (Gn << 8) | Bn;
+
+                        bufferedImg.setRGB(x, y, newRGB);
+                    }
+                }
+
+                // Tampilkan hasil
+                ImageIcon myImgScaled = new ImageIcon(
+                    bufferedImg.getScaledInstance(200, 200, Image.SCALE_DEFAULT));
+                LabelNegative.setIcon(myImgScaled);
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Gagal memproses gambar: " + e.getMessage());
+            }
+        }
     }//GEN-LAST:event_MenuItemNegativeActionPerformed
 
     private void MenuItemEdgeDetectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemEdgeDetectionActionPerformed
         // TODO add your handling code here:
+        JFileChooser loadFile = new JFileChooser();
+
+        loadFile.setFileFilter(
+            new FileNameExtensionFilter(
+                "Image File (*.jpg;*.png;*.bmp)", "jpg", "jpeg", "png", "bmp"));
+
+        if(loadFile.showOpenDialog(jMenu1) == JFileChooser.APPROVE_OPTION) {
+            String path = loadFile.getSelectedFile().getPath();
+            myFileOriginal = loadFile.getSelectedFile();
+
+            try {
+                BufferedImage bufferedImg = ImageIO.read(myFileOriginal);
+
+                int width = bufferedImg.getWidth();
+                int height = bufferedImg.getHeight();
+
+                BufferedImage edgeImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+
+                // Sobel kernels
+                int[][] Gx = {
+                    {-1, 0, 1},
+                    {-2, 0, 2},
+                    {-1, 0, 1}
+                };
+
+                int[][] Gy = {
+                    {-1, -2, -1},
+                    { 0,  0,  0},
+                    { 1,  2,  1}
+                };
+
+                for (int x = 1; x < width - 1; x++) {
+                    for (int y = 1; y < height - 1; y++) {
+                        int sumX = 0;
+                        int sumY = 0;
+
+                        // convolution
+                        for (int i = -1; i <= 1; i++) {
+                            for (int j = -1; j <= 1; j++) {
+                                int rgb = bufferedImg.getRGB(x + i, y + j);
+
+                                int R = (rgb >> 16) & 0xFF;
+                                int G = (rgb >> 8) & 0xFF;
+                                int B = rgb & 0xFF;
+
+                                int gray = (R + G + B) / 3;
+
+                                sumX += gray * Gx[i + 1][j + 1];
+                                sumY += gray * Gy[i + 1][j + 1];
+                            }
+                        }
+
+                        int magnitude = (int)Math.min(255, Math.sqrt(sumX * sumX + sumY * sumY));
+
+                        int newRGB = (magnitude << 16) | (magnitude << 8) | magnitude;
+                        edgeImg.setRGB(x, y, newRGB);
+                    }
+                }
+
+                // Tampilkan hasil ke LabelNormal
+                ImageIcon myImgScaled = new ImageIcon(
+                    edgeImg.getScaledInstance(200, 200, Image.SCALE_DEFAULT));
+                LabelEdge.setIcon(myImgScaled);
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Gagal memproses gambar: " + e.getMessage());
+            }
+        }
     }//GEN-LAST:event_MenuItemEdgeDetectionActionPerformed
 
     private void MenuItemBlurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemBlurActionPerformed
         // TODO add your handling code here:
+        JFileChooser loadFile = new JFileChooser();
+
+        loadFile.setFileFilter(
+            new FileNameExtensionFilter(
+                "Image File (*.jpg;*.png;*.bmp)", "jpg", "jpeg", "png", "bmp"));
+
+        if(loadFile.showOpenDialog(jMenu1) == JFileChooser.APPROVE_OPTION) {
+            String path = loadFile.getSelectedFile().getPath();
+            myFileOriginal = loadFile.getSelectedFile();
+
+            try {
+                BufferedImage bufferedImg = ImageIO.read(myFileOriginal);
+
+                int width = bufferedImg.getWidth();
+                int height = bufferedImg.getHeight();
+
+                BufferedImage gaussianImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+
+                int[][] kernel = {
+                    {1, 2, 1},
+                    {2, 4, 2},
+                    {1, 2, 1}
+                };
+                int kernelSum = 16;
+
+                for (int x = 1; x < width - 1; x++) {
+                    for (int y = 1; y < height - 1; y++) {
+                        int sumR = 0, sumG = 0, sumB = 0;
+
+                        for (int i = -1; i <= 1; i++) {
+                            for (int j = -1; j <= 1; j++) {
+                                int rgb = bufferedImg.getRGB(x + i, y + j);
+
+                                int R = (rgb >> 16) & 0xFF;
+                                int G = (rgb >> 8) & 0xFF;
+                                int B = rgb & 0xFF;
+
+                                int weight = kernel[i + 1][j + 1];
+
+                                sumR += R * weight;
+                                sumG += G * weight;
+                                sumB += B * weight;
+                            }
+                        }
+
+                        int newR = sumR / kernelSum;
+                        int newG = sumG / kernelSum;
+                        int newB = sumB / kernelSum;
+
+                        int newRGB = (newR << 16) | (newG << 8) | newB;
+                        gaussianImg.setRGB(x, y, newRGB);
+                    }
+                }
+
+                // Tampilkan hasil Gaussian blur
+                ImageIcon myImgScaled = new ImageIcon(
+                    gaussianImg.getScaledInstance(200, 200, Image.SCALE_DEFAULT));
+                LabelBlur.setIcon(myImgScaled);
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Gagal memproses gambar: " + e.getMessage());
+            }
+        }
     }//GEN-LAST:event_MenuItemBlurActionPerformed
 
     /**
@@ -271,18 +527,18 @@ public class FormCitra extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel LabelBlur;
+    private javax.swing.JLabel LabelEdge;
+    private javax.swing.JLabel LabelGrayscale;
+    private javax.swing.JLabel LabelNegative;
+    private javax.swing.JLabel LabelNormal;
+    private javax.swing.JLabel LabelThresholding;
     private javax.swing.JMenuItem MenuItemBlur;
     private javax.swing.JMenuItem MenuItemEdgeDetection;
     private javax.swing.JMenuItem MenuItemGrayscale;
     private javax.swing.JMenuItem MenuItemNegative;
     private javax.swing.JMenuItem MenuItemOpenFile;
     private javax.swing.JMenuItem MenuItemThresholding;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
