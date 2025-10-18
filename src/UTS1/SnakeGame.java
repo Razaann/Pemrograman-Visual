@@ -61,8 +61,8 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
         velocityX = 1;
         velocityY = 0;
         
-		//Game Timer
-		gameLoop = new Timer(100, this);
+        //Game Timer
+        gameLoop = new Timer(100, this);
         gameLoop.start();
 	}	
     
@@ -92,6 +92,7 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
         if (gameOver) {
             g.setColor(Color.decode("#E7471D"));
             g.drawString("Game Over: " + String.valueOf(snakeBody.size()), 250, tileSize);
+            g.drawString("Press SPACE To Restart", 210, tileSize*2);
         }
         else {
             g.drawString("Score: " + String.valueOf(snakeBody.size()), 275, tileSize);
@@ -146,6 +147,19 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
     public boolean collision(Tile tile1, Tile tile2) {
         return tile1.x == tile2.x && tile1.y == tile2.y;
     }
+    
+    public void restartGame() {
+        snakeHead = new Tile(5, 5);
+        snakeBody.clear();
+        placeFood();
+
+        velocityX = 1;
+        velocityY = 0;
+
+        gameOver = false;
+        gameLoop.start();
+        repaint();
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) { //called every x milliseconds by gameLoop timer
@@ -158,6 +172,11 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        if (gameOver && e.getKeyCode() == KeyEvent.VK_SPACE) {
+            restartGame();
+            return;
+        }
+        
         // System.out.println("KeyEvent: " + e.getKeyCode());
         if (e.getKeyCode() == KeyEvent.VK_UP && velocityY != 1) {
             velocityX = 0;
