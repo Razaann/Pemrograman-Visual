@@ -95,6 +95,7 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
             g.drawString("Press SPACE To Restart", 210, tileSize*2);
         }
         else {
+            g.setColor(Color.decode("#FFFFFF"));
             g.drawString("Score: " + String.valueOf(snakeBody.size()), 275, tileSize);
         }
 	}
