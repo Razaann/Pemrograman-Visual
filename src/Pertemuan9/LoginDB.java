@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Pertemuan9;
+
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
 import java.sql.DriverManager;
@@ -10,7 +11,15 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.mariadb.jdbc.Connection;
-import org.mariadb.jdbc.Statement;
+import org.mariadb.jdbc.Statement; // Using org.mariadb.jdbc.Statement
+
+// Imports for MD5
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+// Import for PreparedStatement (see security note below)
+import java.sql.PreparedStatement; 
 
 /**
  *
@@ -45,7 +54,8 @@ public class LoginDB extends javax.swing.JFrame {
         LoginButton.setText("Login");
         LoginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LoginButtonActionPerformed(evt);
+                // This is the new method name from your snippet
+                buttonLoginActionPerformed(evt); 
             }
         });
 
@@ -96,46 +106,79 @@ public class LoginDB extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
+    // --- THIS IS YOUR NEW, COMBINED LOGIN METHOD ---
+    private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {                                              
         // TODO add your handling code here:
-        
-        String usn = FieldUsn.getText();
-        String pw = FieldPw.getText();
-        String text;
-        String conn = "jdbc:mariadb://localhost:3306/pemvis25?user=root&password=";
-        
+
+        String conn =
+                "jdbc:mariadb://localhost:3306/pemvis25?user=root&password=";
+
         try {
-            Connection connection = (Connection)DriverManager.getConnection(conn);
-//            JOptionPane.showMessageDialog(null, "Koneksi Berhasil");
-            
-            Statement stmt; // Untuk mengeksekusi query
-            
+            Connection connection = (Connection) DriverManager.getConnection(conn);
+            //JOptionPane.showMessageDialog(null, "Koneksi Berhasil");
+
+            Statement stmt; // untuk mengeksekusi query
             ResultSet rs;
             
-            String query = ("select * from tb_akun where NameUser = '" + usn + "'");
+            // --- FIXED --- Using FieldUsn from your GUI variables
+            String user = FieldUsn.getText(); 
             
+            // !! WARNING: SQL INJECTION VULNERABILITY !!
+            String query = "select * from tb_akun where NameUser = '" + user + "'";
+
             stmt = connection.createStatement();
             rs = stmt.executeQuery(query);
-            
-            if(rs.next()){
-                String pass1 = rs.getString("Pass");
-                String pass2 = pw;
+
+            if (rs.next()) {
+                String pass1 = rs.getString("Pass"); // Hash from DB
                 
+                // --- FIXED --- Using FieldPw from your GUI variables
+                String pass2 = new String(FieldPw.getPassword()); // Get text from JPasswordField
+                pass2 = md5Java(pass2); // Hash the user's input
+                
+                System.out.println("DB Hash (pass1):   [" + pass1 + "]");
+                System.out.println("Input Hash (pass2): [" + pass2 + "]");
+
                 if (pass1.equals(pass2)) {
+                    JOptionPane.showMessageDialog(null, "Login Berhasil");
                     JOptionPane.showMessageDialog(null, "Selamat Datang " + rs.getString("Name"));
-                }
-                else {
+                } else {
                     JOptionPane.showMessageDialog(null, "Password Salah");
                 }
-            }
-            else {
+
+            } else {
                 JOptionPane.showMessageDialog(null, "Username Salah");
             }
-            
+
         } catch (SQLException ex) {
+            // --- FIXED --- Using LoginDB class name for logger
             Logger.getLogger(LoginDB.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_LoginButtonActionPerformed
+
+    }
+    // --- END OF NEW LOGIN METHOD ---
+    
+
+    // --- MD5 HASHING METHOD ---
+    public static String md5Java(String message) {
+        String digest = null;
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] hash = md.digest(message.getBytes("UTF-8"));
+            //merubah byte array ke dalam String Hexadecimal
+            StringBuilder sb = new StringBuilder(2 * hash.length);
+            for (byte b : hash) {
+                sb.append(String.format("%02x", b & 0xff));
+            }
+            digest = sb.toString();
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(LoginDB.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(LoginDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return digest;
+    }
+    // --- END OF MD5 METHOD ---
 
     /**
      * @param args the command line arguments
@@ -144,7 +187,7 @@ public class LoginDB extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
