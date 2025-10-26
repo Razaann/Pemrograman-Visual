@@ -135,9 +135,6 @@ public class LoginDB extends javax.swing.JFrame {
                 // --- FIXED --- Using FieldPw from your GUI variables
                 String pass2 = new String(FieldPw.getPassword()); // Get text from JPasswordField
                 pass2 = md5Java(pass2); // Hash the user's input
-                
-                System.out.println("DB Hash (pass1):   [" + pass1 + "]");
-                System.out.println("Input Hash (pass2): [" + pass2 + "]");
 
                 if (pass1.equals(pass2)) {
                     JOptionPane.showMessageDialog(null, "Login Berhasil");
