@@ -3,6 +3,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Pertemuan10;
+import javax.swing.JOptionPane;
+import java.sql.ResultSet;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.mariadb.jdbc.Connection;
+import org.mariadb.jdbc.Statement; // Using org.mariadb.jdbc.Statement
+
+// Imports for MD5
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 /**
  *
@@ -29,17 +42,20 @@ public class RegistDB extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        TextFieldUsername = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        TextFieldNama = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jPasswordField2 = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        PasswordField = new javax.swing.JPasswordField();
+        ConPasswordField = new javax.swing.JPasswordField();
+        ButtonRegist = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        RadioButtonLaki = new javax.swing.JRadioButton();
+        RadioButtonPerempuan = new javax.swing.JRadioButton();
+        jLabel8 = new javax.swing.JLabel();
+        ComboBoxAgama = new javax.swing.JComboBox<>();
+        ButtonLoginPage = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,10 +64,10 @@ public class RegistDB extends javax.swing.JFrame {
 
         jLabel1.setText("Username");
 
-        jTextField1.setColumns(10);
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        TextFieldUsername.setColumns(10);
+        TextFieldUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                TextFieldUsernameActionPerformed(evt);
             }
         });
 
@@ -59,41 +75,57 @@ public class RegistDB extends javax.swing.JFrame {
 
         jLabel5.setText("Konfirmasi Password");
 
-        jTextField4.setColumns(10);
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        TextFieldNama.setColumns(10);
+        TextFieldNama.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                TextFieldNamaActionPerformed(evt);
             }
         });
 
         jLabel6.setText("Nama Lengkap");
 
-        jPasswordField1.setColumns(10);
+        PasswordField.setColumns(10);
 
-        jPasswordField2.setColumns(10);
+        ConPasswordField.setColumns(10);
 
-        jButton1.setText("Register");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        ButtonRegist.setText("Register");
+        ButtonRegist.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                ButtonRegistActionPerformed(evt);
             }
         });
 
         jLabel7.setText("Jenis Kelamin");
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("Laki - Laki");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(RadioButtonLaki);
+        RadioButtonLaki.setText("Laki - Laki");
+        RadioButtonLaki.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                RadioButtonLakiActionPerformed(evt);
             }
         });
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Perempuan");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(RadioButtonPerempuan);
+        RadioButtonPerempuan.setText("Perempuan");
+        RadioButtonPerempuan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                RadioButtonPerempuanActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Agama");
+
+        ComboBoxAgama.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Islam", "Kristen Protestan", "Kristen Katolik", "Hindu", "Buddha", "Konghucu" }));
+        ComboBoxAgama.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboBoxAgamaActionPerformed(evt);
+            }
+        });
+
+        ButtonLoginPage.setText("Login");
+        ButtonLoginPage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonLoginPageActionPerformed(evt);
             }
         });
 
@@ -108,36 +140,42 @@ public class RegistDB extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addGap(74, 74, 74))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(161, 161, 161))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(TextFieldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel4))
                                 .addGap(63, 63, 63)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(ConPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6)
-                                    .addComponent(jLabel7))
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel8))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
                                         .addGap(47, 47, 47)
-                                        .addComponent(jRadioButton1)
+                                        .addComponent(RadioButtonLaki)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jRadioButton2)))))
+                                        .addComponent(RadioButtonPerempuan))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(TextFieldNama, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(ComboBoxAgama, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                         .addGap(39, 39, 39))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(119, 119, 119)
+                .addComponent(ButtonRegist)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ButtonLoginPage)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,51 +185,140 @@ public class RegistDB extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TextFieldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ConPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TextFieldNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                    .addComponent(RadioButtonLaki)
+                    .addComponent(RadioButtonPerempuan))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(ComboBoxAgama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ButtonRegist)
+                    .addComponent(ButtonLoginPage))
                 .addGap(14, 14, 14))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void TextFieldUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextFieldUsernameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_TextFieldUsernameActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void TextFieldNamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextFieldNamaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_TextFieldNamaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void ButtonRegistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonRegistActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        // Register Button
+        String conn = "jdbc:mariadb://localhost:3306/pemvis25?user=root&password=";
+        
+        String username = TextFieldUsername.getText().trim();
+        String password = new String(PasswordField.getPassword());
+        String confirmPassword = new String(ConPasswordField.getPassword());
+        String namaLengkap = TextFieldNama.getText().trim();
+        String kelamin = RadioButtonLaki.isSelected() ? "L" : (RadioButtonPerempuan.isSelected() ? "P" : "");
+        String agama = ComboBoxAgama.getSelectedItem().toString();
+        
+        if (username.equals("") || password.equals("") || confirmPassword.equals("") || namaLengkap.equals("") || kelamin.equals("") || agama.equals("")) {
+            JOptionPane.showMessageDialog(null, "Semua field wajib diisi!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if (!password.equals(confirmPassword)) {
+            JOptionPane.showMessageDialog(null, "Password dan Konfirmasi Password tidak sama!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        try (Connection connection = (Connection) DriverManager.getConnection(conn)) {
+            String checkQuery = "SELECT * FROM tb_akun WHERE NameUser = ?";
+            
+            try (java.sql.PreparedStatement checkStmt = connection.prepareStatement(checkQuery)) {
+                checkStmt.setString(1, username);
+                ResultSet rs = checkStmt.executeQuery();
+                
+                if (rs.next()) {
+                    JOptionPane.showMessageDialog(null, "Username sudah terdaftar!", "Error", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+            }
+            
+            String insertQuery = "INSERT INTO tb_akun (NameUser, Pass, Name, Kelamin, Agama) VALUES (?, ?, ?, ?, ?)";
+            try (java.sql.PreparedStatement insertStmt = connection.prepareStatement(insertQuery)) {
+                insertStmt.setString(1, username);
+                insertStmt.setString(2, md5Java(password)); // Hash password pakai MD5
+                insertStmt.setString(3, namaLengkap);
+                insertStmt.setString(4, kelamin);
+                insertStmt.setString(5, agama);
+                
+                int result = insertStmt.executeUpdate();
+                
+                if (result == 1) {
+                    JOptionPane.showMessageDialog(null, "Registrasi berhasil!", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+                    TextFieldUsername.setText("");
+                    PasswordField.setText("");
+                    ConPasswordField.setText("");
+                    TextFieldNama.setText("");
+                    buttonGroup1.clearSelection();
+                    ComboBoxAgama.setSelectedIndex(0);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Registrasi gagal!", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RegistDB.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Terjadi kesalahan koneksi database!", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
+            Logger.getLogger(RegistDB.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Terjadi kesalahan hashing password!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_ButtonRegistActionPerformed
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private String md5Java(String message) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        byte[] digest = md.digest(message.getBytes("UTF-8"));
+        StringBuilder sb = new StringBuilder();
+        for (byte b : digest) {
+            sb.append(String.format("%02x", b & 0xff));
+        }
+        return sb.toString();
+    }
+    
+    private void RadioButtonLakiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioButtonLakiActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_RadioButtonLakiActionPerformed
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+    private void RadioButtonPerempuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioButtonPerempuanActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+    }//GEN-LAST:event_RadioButtonPerempuanActionPerformed
+
+    private void ComboBoxAgamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxAgamaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboBoxAgamaActionPerformed
+
+    private void ButtonLoginPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonLoginPageActionPerformed
+        // TODO add your handling code here:
+        new LoginDB().setVisible(true);
+        // Buat windows sekarang hilang
+        this.setVisible(false);
+    }//GEN-LAST:event_ButtonLoginPageActionPerformed
 
     /**
      * @param args the command line arguments
@@ -229,19 +356,22 @@ public class RegistDB extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ButtonLoginPage;
+    private javax.swing.JButton ButtonRegist;
+    private javax.swing.JComboBox<String> ComboBoxAgama;
+    private javax.swing.JPasswordField ConPasswordField;
+    private javax.swing.JPasswordField PasswordField;
+    private javax.swing.JRadioButton RadioButtonLaki;
+    private javax.swing.JRadioButton RadioButtonPerempuan;
+    private javax.swing.JTextField TextFieldNama;
+    private javax.swing.JTextField TextFieldUsername;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JLabel jLabel8;
     // End of variables declaration//GEN-END:variables
 }
