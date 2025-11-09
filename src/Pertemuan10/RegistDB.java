@@ -56,6 +56,8 @@ public class RegistDB extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         ComboBoxAgama = new javax.swing.JComboBox<>();
         ButtonLoginPage = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        TextFieldNama1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -129,6 +131,15 @@ public class RegistDB extends javax.swing.JFrame {
             }
         });
 
+        jLabel9.setText("No Telp");
+
+        TextFieldNama1.setColumns(10);
+        TextFieldNama1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextFieldNama1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -157,7 +168,8 @@ public class RegistDB extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel7)
-                                    .addComponent(jLabel8))
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel9))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(47, 47, 47)
@@ -168,10 +180,13 @@ public class RegistDB extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(TextFieldNama, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(ComboBoxAgama, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                            .addComponent(ComboBoxAgama, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(TextFieldNama1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(39, 39, 39))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(119, 119, 119)
+                .addGap(122, 122, 122)
                 .addComponent(ButtonRegist)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ButtonLoginPage)
@@ -207,11 +222,15 @@ public class RegistDB extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(ComboBoxAgama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(TextFieldNama1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ButtonRegist)
                     .addComponent(ButtonLoginPage))
-                .addGap(14, 14, 14))
+                .addGap(54, 54, 54))
         );
 
         pack();
@@ -320,6 +339,10 @@ public class RegistDB extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_ButtonLoginPageActionPerformed
 
+    private void TextFieldNama1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextFieldNama1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextFieldNama1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -364,6 +387,7 @@ public class RegistDB extends javax.swing.JFrame {
     private javax.swing.JRadioButton RadioButtonLaki;
     private javax.swing.JRadioButton RadioButtonPerempuan;
     private javax.swing.JTextField TextFieldNama;
+    private javax.swing.JTextField TextFieldNama1;
     private javax.swing.JTextField TextFieldUsername;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
@@ -373,5 +397,6 @@ public class RegistDB extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     // End of variables declaration//GEN-END:variables
 }

@@ -10,7 +10,9 @@ import org.mariadb.jdbc.Statement;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.io.UnsupportedEncodingException;
 
 /**
  *
@@ -34,29 +36,45 @@ public class crudDB extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TableData = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        ButtonShowData = new javax.swing.JButton();
+        TextFieldUsername = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        TextFieldPassword = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        TextFieldNama = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        RadioButtonLaki = new javax.swing.JRadioButton();
+        RadioButtonPerempuan = new javax.swing.JRadioButton();
+        ComboBoxAgama = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        TextFieldNoTelp = new javax.swing.JTextField();
+        ButtonDelete = new javax.swing.JButton();
+        ButtonUpdate = new javax.swing.JButton();
+        TextFieldConfirmPassword = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        ButtonAdd = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TableData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "Username", "Password", "Name", "Jenis Kelamin", "Agama"
+                "Username", "Password", "Nama", "Jenis Kelamin", "Agama", "No Telp"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -67,15 +85,88 @@ public class crudDB extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        TableData.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TableDataMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(TableData);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Database Akun");
 
-        jButton1.setText("Show All Data");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        ButtonShowData.setText("Show Data");
+        ButtonShowData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                ButtonShowDataActionPerformed(evt);
+            }
+        });
+
+        TextFieldUsername.setColumns(10);
+
+        jLabel2.setText("Username");
+
+        TextFieldPassword.setColumns(10);
+
+        jLabel3.setText("Password");
+
+        jLabel4.setText("Nama");
+
+        TextFieldNama.setColumns(10);
+
+        jLabel7.setText("Jenis Kelamin");
+
+        buttonGroup1.add(RadioButtonLaki);
+        RadioButtonLaki.setText("Laki - Laki");
+        RadioButtonLaki.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RadioButtonLakiActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(RadioButtonPerempuan);
+        RadioButtonPerempuan.setText("Perempuan");
+        RadioButtonPerempuan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RadioButtonPerempuanActionPerformed(evt);
+            }
+        });
+
+        ComboBoxAgama.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Islam", "Kristen Protestan", "Kristen Katolik", "Hindu", "Buddha", "Konghucu" }));
+        ComboBoxAgama.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboBoxAgamaActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Agama");
+
+        jLabel6.setText("No Telp");
+
+        TextFieldNoTelp.setColumns(10);
+
+        ButtonDelete.setText("Delete Data");
+        ButtonDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonDeleteActionPerformed(evt);
+            }
+        });
+
+        ButtonUpdate.setText("Update Data");
+        ButtonUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonUpdateActionPerformed(evt);
+            }
+        });
+
+        TextFieldConfirmPassword.setColumns(10);
+
+        jLabel8.setText("Confirm Password");
+
+        ButtonAdd.setText("Add Data");
+        ButtonAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonAddActionPerformed(evt);
             }
         });
 
@@ -84,20 +175,41 @@ public class crudDB extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(398, 398, 398)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ButtonAdd)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ButtonUpdate)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ButtonDelete)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ButtonShowData))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(237, 237, 237))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addContainerGap())))))
+                            .addComponent(TextFieldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(TextFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(TextFieldNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)
+                            .addComponent(RadioButtonLaki)
+                            .addComponent(RadioButtonPerempuan)
+                            .addComponent(ComboBoxAgama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(TextFieldNoTelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TextFieldConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 767, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,9 +217,44 @@ public class crudDB extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TextFieldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TextFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TextFieldConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TextFieldNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(RadioButtonLaki)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(RadioButtonPerempuan)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ComboBoxAgama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TextFieldNoTelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ButtonShowData)
+                    .addComponent(ButtonDelete)
+                    .addComponent(ButtonUpdate)
+                    .addComponent(ButtonAdd))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
@@ -116,50 +263,341 @@ public class crudDB extends javax.swing.JFrame {
 
     DefaultTableModel model;
     
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        model = (DefaultTableModel)jTable1.getModel();
+    // SHOW DATA FUNCTION (READ)
+    private void ButtonShowDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonShowDataActionPerformed
+        model = (DefaultTableModel)TableData.getModel();
         
         String conn = "jdbc:mariadb://localhost:3306/pemvis25?user=root&password=";
         
-                try {
-                    Connection connection = (Connection) DriverManager.getConnection(conn);
-
-                    //import org.mariadb.jdbc.Statement;
-                    Statement stmt;
-
-                    //import java.sql.ResultSet;
-                    ResultSet rs;
-
-                    String SQL = "select * from tb_akun ";
-
-                    stmt = connection.createStatement();
-                    rs = stmt.executeQuery(SQL);
-
-                    String username = "";
-                    String password = "";
-                    String namaLengkap = "";
-                    String jenisKelamin = "";
-                    String agama = "";
-
-                    model.setRowCount(0);
+        try {
+            Connection connection = (Connection) DriverManager.getConnection(conn);
+            Statement stmt;
+            ResultSet rs;
+            
+            String SQL = "SELECT * FROM tb_akun";
+            
+            stmt = connection.createStatement();
+            rs = stmt.executeQuery(SQL);
+            
+            model.setRowCount(0);
+            
+            while(rs.next()){
+                String username = rs.getString("NameUser");
+                String password = rs.getString("Pass");
+                String namaLengkap = rs.getString("Name");
+                String jenisKelamin = rs.getString("Kelamin");
+                String agama = rs.getString("Agama");
+                String nomorTelp = rs.getString("NomorTelp");
                 
-                    while(rs.next()){
-                        username = rs.getString("NameUser");
-                        password = rs.getString("Pass");
-                        namaLengkap = rs.getString("Name");
-                        jenisKelamin = rs.getString("Kelamin");
-                        agama = rs.getString("Agama");
-                        model.addRow(new Object[] {username,password,namaLengkap,jenisKelamin,agama});
-                    }
+                // Display full gender text in table
+                String jenisKelaminDisplay = jenisKelamin.equals("L") ? "Laki-Laki" : "Perempuan";
                 
+                model.addRow(new Object[] {username, password, namaLengkap, jenisKelaminDisplay, agama, nomorTelp});
+            }
+            
+            rs.close();
+            stmt.close();
+            connection.close();
+        }
+        catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Error loading data: " + e.getMessage());
+        }
+    }//GEN-LAST:event_ButtonShowDataActionPerformed
+
+    // ADD DATA FUNCTION (CREATE)
+    private void ButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonAddActionPerformed
+        // Validate inputs
+        if(TextFieldUsername.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Username tidak boleh kosong!");
+            return;
+        }
+        
+        if(TextFieldPassword.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Password tidak boleh kosong!");
+            return;
+        }
+        
+        if(!TextFieldPassword.getText().equals(TextFieldConfirmPassword.getText())) {
+            JOptionPane.showMessageDialog(null, "Password dan Confirm Password tidak sama!");
+            return;
+        }
+        
+        if(TextFieldNama.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Nama tidak boleh kosong!");
+            return;
+        }
+        
+        if(!RadioButtonLaki.isSelected() && !RadioButtonPerempuan.isSelected()) {
+            JOptionPane.showMessageDialog(null, "Pilih jenis kelamin!");
+            return;
+        }
+        
+        if(TextFieldNoTelp.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No Telp tidak boleh kosong!");
+            return;
+        }
+        
+        String conn = "jdbc:mariadb://localhost:3306/pemvis25?user=root&password=";
+        
+        try {
+            Connection connection = (Connection) DriverManager.getConnection(conn);
+            
+            // Get gender value
+            String jenisKelamin = RadioButtonLaki.isSelected() ? "L" : "P";
+            
+            // Get agama value
+            String agama = ComboBoxAgama.getSelectedItem().toString();
+            
+            // Hash password
+            String hashedPassword = md5Java(TextFieldPassword.getText());
+            
+            // Use PreparedStatement to prevent SQL injection
+            String SQL = "INSERT INTO tb_akun (NameUser, Pass, Name, Kelamin, Agama, NomorTelp) VALUES (?, ?, ?, ?, ?, ?)";
+            java.sql.PreparedStatement pstmt = connection.prepareStatement(SQL);
+            pstmt.setString(1, TextFieldUsername.getText());
+            pstmt.setString(2, hashedPassword);
+            pstmt.setString(3, TextFieldNama.getText());
+            pstmt.setString(4, jenisKelamin);
+            pstmt.setString(5, agama);
+            pstmt.setString(6, TextFieldNoTelp.getText());
+            
+            pstmt.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Data berhasil ditambahkan!");
+            
+            // Clear fields
+            clearFields();
+            
+            // Refresh table
+            ButtonShowDataActionPerformed(evt);
+            
+            pstmt.close();
+            connection.close();
+        }
+        catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Error menambah data: " + e.getMessage());
+        }
+    }//GEN-LAST:event_ButtonAddActionPerformed
+
+    // UPDATE DATA FUNCTION
+    private void ButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonUpdateActionPerformed
+        // Validate inputs
+        if(TextFieldUsername.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Username tidak boleh kosong!");
+            return;
+        }
+        
+        if(TextFieldNama.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Nama tidak boleh kosong!");
+            return;
+        }
+        
+        if(!RadioButtonLaki.isSelected() && !RadioButtonPerempuan.isSelected()) {
+            JOptionPane.showMessageDialog(null, "Pilih jenis kelamin!");
+            return;
+        }
+        
+        if(TextFieldNoTelp.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No Telp tidak boleh kosong!");
+            return;
+        }
+        
+        String conn = "jdbc:mariadb://localhost:3306/pemvis25?user=root&password=";
+        
+        try {
+            Connection connection = (Connection) DriverManager.getConnection(conn);
+            
+            // Get gender value
+            String jenisKelamin = RadioButtonLaki.isSelected() ? "L" : "P";
+            
+            // Get agama value
+            String agama = ComboBoxAgama.getSelectedItem().toString();
+            
+            // Check if updating password
+            if(TextFieldPassword.getText().isEmpty() && TextFieldConfirmPassword.getText().isEmpty()) {
+                // Update without password change
+                String SQL = "UPDATE tb_akun SET Name = ?, Kelamin = ?, Agama = ?, NomorTelp = ? WHERE NameUser = ?";
+                java.sql.PreparedStatement pstmt = connection.prepareStatement(SQL);
+                pstmt.setString(1, TextFieldNama.getText());
+                pstmt.setString(2, jenisKelamin);
+                pstmt.setString(3, agama);
+                pstmt.setString(4, TextFieldNoTelp.getText());
+                pstmt.setString(5, TextFieldUsername.getText());
+                
+                int rowsAffected = pstmt.executeUpdate();
+                
+                if(rowsAffected > 0) {
+                    JOptionPane.showMessageDialog(null, "Data berhasil diupdate!");
+                    clearFields();
+                    ButtonShowDataActionPerformed(evt);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Username tidak ditemukan!");
                 }
-                catch(Exception e)
-                {
-                    //System.out.println(e);
-                    JOptionPane.showMessageDialog(null, e);
+                
+                pstmt.close();
+            }
+            else if(TextFieldPassword.getText().equals(TextFieldConfirmPassword.getText())) {
+                // Update with password change
+                String hashedPassword = md5Java(TextFieldPassword.getText());
+                
+                String SQL = "UPDATE tb_akun SET Pass = ?, Name = ?, Kelamin = ?, Agama = ?, NomorTelp = ? WHERE NameUser = ?";
+                java.sql.PreparedStatement pstmt = connection.prepareStatement(SQL);
+                pstmt.setString(1, hashedPassword);
+                pstmt.setString(2, TextFieldNama.getText());
+                pstmt.setString(3, jenisKelamin);
+                pstmt.setString(4, agama);
+                pstmt.setString(5, TextFieldNoTelp.getText());
+                pstmt.setString(6, TextFieldUsername.getText());
+                
+                int rowsAffected = pstmt.executeUpdate();
+                
+                if(rowsAffected > 0) {
+                    JOptionPane.showMessageDialog(null, "Data berhasil diupdate!");
+                    clearFields();
+                    ButtonShowDataActionPerformed(evt);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Username tidak ditemukan!");
                 }
-    }//GEN-LAST:event_jButton1ActionPerformed
+                
+                pstmt.close();
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Password dan Confirm Password tidak sama!");
+            }
+            
+            connection.close();
+        }
+        catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Error mengupdate data: " + e.getMessage());
+        }
+    }//GEN-LAST:event_ButtonUpdateActionPerformed
+
+    // DELETE DATA FUNCTION
+    private void ButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonDeleteActionPerformed
+        // Validate input
+        if(TextFieldUsername.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Masukkan username yang akan dihapus!");
+            return;
+        }
+        
+        // Confirmation dialog
+        int confirm = JOptionPane.showConfirmDialog(null, 
+            "Apakah Anda yakin ingin menghapus akun ini?", 
+            "Konfirmasi Hapus", 
+            JOptionPane.YES_NO_OPTION);
+        
+        if(confirm == JOptionPane.YES_OPTION) {
+            String conn = "jdbc:mariadb://localhost:3306/pemvis25?user=root&password=";
+            
+            try {
+                Connection connection = (Connection) DriverManager.getConnection(conn);
+                
+                // Use PreparedStatement to prevent SQL injection
+                String SQL = "DELETE FROM tb_akun WHERE NameUser = ?";
+                java.sql.PreparedStatement pstmt = connection.prepareStatement(SQL);
+                pstmt.setString(1, TextFieldUsername.getText());
+                
+                int rowsAffected = pstmt.executeUpdate();
+                
+                if(rowsAffected > 0) {
+                    JOptionPane.showMessageDialog(null, "Data berhasil dihapus!");
+                    clearFields();
+                    ButtonShowDataActionPerformed(evt);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Username tidak ditemukan!");
+                }
+                
+                pstmt.close();
+                connection.close();
+            }
+            catch(Exception e) {
+                JOptionPane.showMessageDialog(null, "Error menghapus data: " + e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_ButtonDeleteActionPerformed
+
+    // TABLE MOUSE CLICK HANDLER (for selecting row to update/delete)
+    private void TableDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableDataMouseClicked
+        int row = TableData.getSelectedRow();
+        
+        if(row == -1) {
+            return;
+        }
+        
+        try {
+            // Populate Username (Column 0)
+            String username = TableData.getValueAt(row, 0).toString();
+            TextFieldUsername.setText(username);
+            
+            // Skip Password (Column 1) - Don't populate for security
+            
+            // Populate Nama (Column 2)
+            String nama = TableData.getValueAt(row, 2).toString();
+            TextFieldNama.setText(nama);
+            
+            // Populate Jenis Kelamin (Column 3)
+            String jenisKelamin = TableData.getValueAt(row, 3).toString();
+            if(jenisKelamin.equalsIgnoreCase("Laki-Laki") || jenisKelamin.equalsIgnoreCase("L")) {
+                RadioButtonLaki.setSelected(true);
+            } else if(jenisKelamin.equalsIgnoreCase("Perempuan") || jenisKelamin.equalsIgnoreCase("P")) {
+                RadioButtonPerempuan.setSelected(true);
+            }
+            
+            // Populate Agama (Column 4)
+            String agama = TableData.getValueAt(row, 4).toString();
+            ComboBoxAgama.setSelectedItem(agama);
+            
+            // Populate No Telp (Column 5)
+            String nomorTelp = TableData.getValueAt(row, 5).toString();
+            TextFieldNoTelp.setText(nomorTelp);
+            
+            // Clear password fields for security
+            TextFieldPassword.setText("");
+            TextFieldConfirmPassword.setText("");
+            
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Error memuat data: " + e.getMessage());
+        }
+    }//GEN-LAST:event_TableDataMouseClicked
+
+    private void RadioButtonLakiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioButtonLakiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RadioButtonLakiActionPerformed
+
+    private void RadioButtonPerempuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioButtonPerempuanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RadioButtonPerempuanActionPerformed
+
+    private void ComboBoxAgamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxAgamaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboBoxAgamaActionPerformed
+
+    // MD5 HASHING FUNCTION
+    private String md5Java(String message) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] digest = md.digest(message.getBytes("UTF-8"));
+            StringBuilder sb = new StringBuilder();
+            for (byte b : digest) {
+                sb.append(String.format("%02x", b & 0xff));
+            }
+            return sb.toString();
+        } catch(NoSuchAlgorithmException | UnsupportedEncodingException e) {
+            JOptionPane.showMessageDialog(null, "Error hashing password: " + e.getMessage());
+            return "";
+        }
+    }
+    
+    // HELPER FUNCTION TO CLEAR ALL FIELDS
+    private void clearFields() {
+        TextFieldUsername.setText("");
+        TextFieldPassword.setText("");
+        TextFieldConfirmPassword.setText("");
+        TextFieldNama.setText("");
+        TextFieldNoTelp.setText("");
+        buttonGroup1.clearSelection();
+        ComboBoxAgama.setSelectedIndex(0);
+    }
 
     /**
      * @param args the command line arguments
@@ -197,9 +635,28 @@ public class crudDB extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton ButtonAdd;
+    private javax.swing.JButton ButtonDelete;
+    private javax.swing.JButton ButtonShowData;
+    private javax.swing.JButton ButtonUpdate;
+    private javax.swing.JComboBox<String> ComboBoxAgama;
+    private javax.swing.JRadioButton RadioButtonLaki;
+    private javax.swing.JRadioButton RadioButtonPerempuan;
+    private javax.swing.JTable TableData;
+    private javax.swing.JTextField TextFieldConfirmPassword;
+    private javax.swing.JTextField TextFieldNama;
+    private javax.swing.JTextField TextFieldNoTelp;
+    private javax.swing.JTextField TextFieldPassword;
+    private javax.swing.JTextField TextFieldUsername;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
