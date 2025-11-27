@@ -24,16 +24,16 @@ public class KeyHandler implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
         
-        if (code == KeyEvent.VK_W) {
+        if (code == KeyEvent.VK_UP) {
             ButtonUp = true;
         }
-        if (code == KeyEvent.VK_S) {
+        if (code == KeyEvent.VK_DOWN) {
             ButtonDown = true;
         }
-        if (code == KeyEvent.VK_A) {
+        if (code == KeyEvent.VK_LEFT) {
             ButtonLeft = true;
         }
-        if (code == KeyEvent.VK_D) {
+        if (code == KeyEvent.VK_RIGHT) {
             ButtonRight = true;
         }
     }
@@ -42,16 +42,16 @@ public class KeyHandler implements KeyListener {
     public void keyReleased (KeyEvent e) {
         int code = e.getKeyCode();
         
-        if (code == KeyEvent.VK_W) {
+        if (code == KeyEvent.VK_UP) {
             ButtonUp = false;
         }
-        if (code == KeyEvent.VK_S) {
+        if (code == KeyEvent.VK_DOWN) {
             ButtonDown = false;
         }
-        if (code == KeyEvent.VK_A) {
+        if (code == KeyEvent.VK_LEFT) {
             ButtonLeft = false;
         }
-        if (code == KeyEvent.VK_D) {
+        if (code == KeyEvent.VK_RIGHT) {
             ButtonRight = false;
         }   
     }

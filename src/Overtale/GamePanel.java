@@ -30,11 +30,7 @@ public class GamePanel extends JPanel implements Runnable {
     KeyHandler keyH = new KeyHandler();
     Thread gameThread; // The Game Clock
     
-    // Player Settings
-    int playerX = 100;
-    int playerY = 100;
-    int playerSpeed = 4;
-    BufferedImage playerImage;
+    Player player = new Player(this, keyH);
     
     public GamePanel() {
         this.setPreferredSize(new Dimension(ScreenWidth, ScreenHeight));
@@ -44,18 +40,6 @@ public class GamePanel extends JPanel implements Runnable {
         // Input Listener
         this.addKeyListener(keyH);
         this.setFocusable(true);
-        
-        loadPlayerImage();
-    }
-    
-    public void loadPlayerImage() {
-        try {
-            playerImage = ImageIO.read(getClass().getResourceAsStream("/Overtale/Assets/player.png"));
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Image not found");
-        }
     }
     
     public void startGameThread(){
@@ -93,33 +77,14 @@ public class GamePanel extends JPanel implements Runnable {
     }
     
     public void update() {
-        if (keyH.ButtonUp == true) {
-            playerY -= playerSpeed;
-        }
-        if (keyH.ButtonDown == true) {
-            playerY += playerSpeed;
-        }
-        if (keyH.ButtonRight == true) {
-            playerX += playerSpeed;
-        }
-        if (keyH.ButtonLeft == true) {
-            playerX -= playerSpeed;
-        }
+        player.update();
     }
     
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        
         Graphics2D g2 = (Graphics2D) g;
         
-        if (playerImage != null) {
-            g2.drawImage(playerImage, playerX, playerY, TileSize, TileSize, null);
-        }
-        else {
-            // White Box if fail to load image
-            g2.setColor(Color.white);
-            g2.fillRect(playerX, playerY, TileSize, TileSize);
-        }
+        player.draw(g2);
         
         g2.dispose();
     }
